@@ -8,7 +8,7 @@ if __name__ == "__main__":
 
     client = ApiClient()
 
-    symbol = Symbol(Symbol.EOS, Symbol.USDT).get_symbol()
+    symbol = Symbol(Symbol.BTC, Symbol.USDT).get_symbol()
 
     print symbol
 
@@ -16,13 +16,13 @@ if __name__ == "__main__":
     # market = client.get_kline(symbol, "1min", "150")
     # ticks = market.ticks
     # for tick in ticks:
-    #     print "1min内 %s 最低价:%s,最高价:%s" % (symbol,tick.low, tick.high)
+        # print "1min内 %s 最低价:%s,最高价:%s" % (symbol,tick.low, tick.high)
 
 
     # 聚合行情测试
     # merge = client.get_merged_tickers(symbol)
     # tick = merge.tick
-    # print "%s 24小时成交数量为:%s,开盘价:%s,收盘价:%s"%(symbol,tick.amount,tick.open,tick.close)
+    # print tick
 
 
     # 深度图信息
@@ -56,13 +56,11 @@ if __name__ == "__main__":
     # else:
     #     print "None"
     # 撤单
-    # client.cancel_order(order.id)
+    # client.cancel_order("812362689")
 
     # 订单详情
-    # order = client.get_order_detail("811025068")
-    # print "time:%s,symbol:%s,type:%s,price:%s,amount:%s,field_amount:%s,field_cash_amount:%s,status:%s" % (
-    # order.created_at, order.symbol, order.type, order.price, order.amount, order.field_amount, order.field_cash_amount,
-    # order.state)
+    # order = client.get_order_detail("812362689")
+    # print order
 
     #历史订单条件查询
     # orders = client.get_all_orders(symbol,"canceled",start_date="2018-01-18",end_date="2018-01-19")
@@ -86,6 +84,6 @@ if __name__ == "__main__":
     # client.repay_loan("211790","30")
 
     #借贷订单
-    orders = client.get_loan_orders(symbol,Symbol.EOS)
-    for order in orders:
-        print order
+    # orders = client.get_loan_orders(symbol,Symbol.EOS)
+    # for order in orders:
+    #     print order
