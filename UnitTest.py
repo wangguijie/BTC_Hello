@@ -72,4 +72,20 @@ if __name__ == "__main__":
     #         order.field_cash_amount,
     #         order.state)
 
+    #从交易账户转移到借贷账户
+    # client.transfer_balance_from_spot_to_loan(symbol,Symbol.USDT,"1")
 
+    #从借贷账户转移到交易账户
+    # client.tratransfer_balance_from_loan_to_spot(symbol,Symbol.USDT,"1")
+
+    #借贷
+    # order = client.apply_for_loan(symbol,Symbol.EOS,"30")
+    # print "loan id:",order.id
+
+    #偿还借贷
+    # client.repay_loan("211790","30")
+
+    #借贷订单
+    orders = client.get_loan_orders(symbol,Symbol.EOS)
+    for order in orders:
+        print order

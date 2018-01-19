@@ -1,12 +1,13 @@
 # coding:utf-8
+from model.Object import Object
 
 
-class Market:
+class Market(Object):
     """
     行情
     """
 
-    class Tick:
+    class Tick(Object):
         '''
         行情数据
         '''

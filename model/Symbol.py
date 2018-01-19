@@ -1,7 +1,8 @@
 # coding:utf-8
+from model.Object import Object
 
 
-class Symbol:
+class Symbol(Object):
     BTC = "btc"
     BCH = "bch"
     XRP = "xrp"

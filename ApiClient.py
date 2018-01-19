@@ -3,6 +3,7 @@
 from model.Account import Account
 from model.Balance import Balance
 from model.Depth import Depth
+from model.LoanOrder import LoanOrder
 from model.Market import Market
 from model.Merge import Merge
 from model.Order import Order
@@ -11,7 +12,6 @@ from service.HuobiService import *
 
 
 class ApiClient:
-
     def get_kline(self, symbol, period, size):
         '''
         获取行情k线
@@ -265,4 +265,83 @@ class ApiClient:
 
             orders.append(order)
 
+        return orders
+
+    def transfer_balance_from_spot_to_loan(self, symbol, currency, amount):
+        '''
+        从交易账户转移资产到借贷账户
+        :param symbol:交易对
+        :param currency:币种
+        :param amount:金额
+        :return:
+        '''
+        json = exchange_to_margin(symbol, currency, amount)
+        if json["status"] != "ok":
+            print "Error:", json["err-msg"]
+
+    def tratransfer_balance_from_loan_to_spot(self, symbol, currency, amount):
+        '''
+        从借贷账户转移资产到交易账户
+        :param symbol:交易对
+        :param currency:币种
+        :param amount:金额
+        :return:
+        '''
+        json = margin_to_exchange(symbol, currency, amount)
+        if json["status"] != "ok":
+            print "Error:", json["err-msg"]
+
+    def apply_for_loan(self, symbol, currency, amount):
+        '''
+        申请借贷
+        :param symbol:交易对
+        :param currency:币种
+        :param amount:金额
+        :return:
+        '''
+        json = get_margin(symbol, currency, amount)
+        if json["status"] != "ok":
+            print "Error:", json["err-msg"]
+            return None
+
+        id = json["data"]
+        order = Order(id)
+        return order
+
+    def repay_loan(self, order_id, amount):
+        '''
+        :param order_id:
+        :param amount:金额
+        :return:
+        '''
+        json = repay_margin(order_id, amount)
+        if json["status"] != "ok":
+            print "Error:", json["err-msg"]
+
+    def get_loan_orders(self, symbol, currency, start_date=None, end_date=None,
+                        states=None, _from=None, direct=None, size=None):
+        json = loan_orders(symbol, currency, start_date, end_date, _from, direct, size)
+        if json["status"] != "ok":
+            print "Error:", json["err-msg"]
+            return None
+
+        orders = []
+        data = json["data"]
+        for d in data:
+            loan_order = LoanOrder()
+            loan_order.currency = d["currency"]
+            loan_order.symbol = d["symbol"]
+            loan_order.accrued_at = d["accrued-at"]
+            loan_order.loan_amount = d["loan-amount"]
+            loan_order.loan_balance = d["loan-balance"]
+            loan_order.interest_balance = d["interest-balance"]
+            loan_order.created_at = d["created-at"]
+            loan_order.interest_amount = d["interest-amount"]
+            loan_order.interest_rate = d["interest-rate"]
+            loan_order.account_id = d["account-id"]
+            loan_order.user_id = d["user-id"]
+            loan_order.id = d["id"]
+            loan_order.state = d["state"]
+
+            orders.append(loan_order)
         return orders

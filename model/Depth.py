@@ -1,11 +1,13 @@
 # coding:utf-8
+from model.Object import Object
 
-class Depth:
+
+class Depth(Object):
     '''
     行情深度信息
     '''
 
-    class Tick:
+    class Tick(Object):
         def __init__(self, bids, asks):
             '''
             :param bids: 买盘,[price(成交价), amount(成交量)], 按price降序

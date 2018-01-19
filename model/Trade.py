@@ -1,12 +1,14 @@
 # coding:utf-8
+from model.Object import Object
 
-class Trade:
+
+class Trade(Object):
     '''
     交易记录
     '''
 
-    class Tick:
-        class Data:
+    class Tick(Object):
+        class Data(Object):
             def __init__(self, id, price, amount, direction, ts):
                 '''
                 :param id:成交id

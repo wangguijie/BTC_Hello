@@ -1,6 +1,8 @@
 # coding:utf-8
+from model.Object import Object
 
-class Order:
+
+class Order(Object):
     def __init__(self, id = None, symbol=None, account_id=None, amount=None, price=None, created_at=None, type=None,
                  field_amount=None,
                  field_cash_amount=None, field_fees=None, finished_at=None, source=None, state=None,

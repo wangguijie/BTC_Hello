@@ -1,7 +1,8 @@
 # coding:utf-8
+from model.Object import Object
 
 
-class Balance:
+class Balance(Object):
     def __init__(self, balance, currency, type):
         '''
         :param balance:余额

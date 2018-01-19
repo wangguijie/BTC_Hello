@@ -1,6 +1,8 @@
 # coding:utf-8
+from model.Object import Object
 
-class Merge:
+
+class Merge(Object):
     '''
     聚合行情 -24小时成交量数据
     '''
@@ -15,7 +17,7 @@ class Merge:
         self.tick = tick
         self.ch = ch
 
-    class Tick:
+    class Tick(Object):
         '''
         行情数据
         '''

@@ -1,6 +1,8 @@
 # coding:utf-8
+from model.Object import Object
 
-class Account:
+
+class Account(Object):
     def __init__(self, id, state, type, subtype):
         '''
         :param id:账户id
